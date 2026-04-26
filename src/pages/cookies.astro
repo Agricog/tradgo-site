@@ -1,0 +1,87 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const title = 'Cookies Policy — TradGo';
+const description = "How TradGo uses cookies and similar technologies on tradgo.co.uk and app.tradgo.co.uk.";
+const canonical = 'https://tradgo.co.uk/cookies';
+const lastUpdated = '26 April 2026';
+---
+
+<Layout title={title} description={description} canonical={canonical} noindex={false}>
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+    <header class="mb-10">
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-surface-900 tracking-tight mb-3">Cookies Policy</h1>
+      <p class="text-sm text-surface-700">Last updated: {lastUpdated}</p>
+    </header>
+
+    <div class="prose prose-surface max-w-none space-y-6 text-surface-800 leading-relaxed">
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">1. What are cookies?</h2>
+        <p>Cookies are small text files stored on your device when you visit a website. They help the site remember things about your visit — like whether you're logged in or what your preferences are.</p>
+        <p>Similar technologies (local storage, session storage) work in much the same way. This policy covers both.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">2. The marketing site (tradgo.co.uk)</h2>
+        <p>The TradGo marketing site is a static website. We do not use any cookies for tracking, analytics, advertising, or any other non-essential purpose on the marketing pages.</p>
+        <p>Cloudflare (our CDN provider) may set strictly necessary cookies for security purposes, such as detecting bot traffic and protecting against denial-of-service attacks. These are essential to keeping the site online and don't track you across other websites.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">3. The app (app.tradgo.co.uk)</h2>
+        <p>When you use the TradGo dashboard at app.tradgo.co.uk, the following cookies and similar storage are used:</p>
+
+        <h3 class="text-lg font-semibold text-surface-900 mt-4 mb-2">Strictly necessary</h3>
+        <ul class="list-disc pl-6 space-y-1">
+          <li><strong>Authentication cookies (Clerk):</strong> Keep you signed in to your account. Without these, the service cannot function.</li>
+          <li><strong>Session cookies:</strong> Maintain your session as you navigate between pages.</li>
+          <li><strong>CSRF protection:</strong> Prevents cross-site request forgery attacks.</li>
+          <li><strong>Stripe (when subscribing):</strong> Stripe sets cookies during the checkout flow to process payments securely. See <a href="https://stripe.com/cookies-policy/legal" class="text-brand-600 hover:text-brand-700 underline" rel="noopener" target="_blank">Stripe's cookie policy</a>.</li>
+          <li><strong>Cloudflare:</strong> Same as the marketing site — security and bot protection.</li>
+        </ul>
+
+        <p>These cookies are essential for the service and do not require consent under UK law (PECR Regulation 6(4)).</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">4. What we do NOT use</h2>
+        <p>TradGo does not use:</p>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Google Analytics, Facebook Pixel, or any other third-party tracking</li>
+          <li>Advertising cookies</li>
+          <li>Social media tracking pixels</li>
+          <li>Cross-site tracking of any kind</li>
+        </ul>
+        <p>If we add analytics or marketing cookies in the future, we'll update this policy and ask for your consent first via a cookie banner.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">5. Managing cookies</h2>
+        <p>You can control or delete cookies through your browser settings. Note that blocking strictly necessary cookies will prevent the TradGo dashboard from functioning properly — you won't be able to sign in.</p>
+        <p>Browser-specific instructions:</p>
+        <ul class="list-disc pl-6 space-y-1">
+          <li><a href="https://support.google.com/chrome/answer/95647" class="text-brand-600 hover:text-brand-700 underline" rel="noopener" target="_blank">Chrome</a></li>
+          <li><a href="https://support.apple.com/en-gb/guide/safari/sfri11471/mac" class="text-brand-600 hover:text-brand-700 underline" rel="noopener" target="_blank">Safari</a></li>
+          <li><a href="https://support.mozilla.org/en-US/kb/cookies-information-websites-store-on-your-computer" class="text-brand-600 hover:text-brand-700 underline" rel="noopener" target="_blank">Firefox</a></li>
+          <li><a href="https://support.microsoft.com/en-us/microsoft-edge" class="text-brand-600 hover:text-brand-700 underline" rel="noopener" target="_blank">Edge</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">6. Changes to this policy</h2>
+        <p>If we change how we use cookies, we'll update this page. The "Last updated" date at the top will reflect any changes.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">7. Contact</h2>
+        <p>Questions about cookies or this policy:</p>
+        <p class="ml-4">
+          Michael Stevenson, trading as Autaimate<br />
+          49 Vicarage Road, St Austell, PL24 2PH, United Kingdom<br />
+          <a href="mailto:hello@tradgo.co.uk" class="text-brand-600 hover:text-brand-700 underline">hello@tradgo.co.uk</a>
+        </p>
+      </section>
+    </div>
+  </article>
+</Layout>
