@@ -17,7 +17,54 @@ const data = trade.data;
 
 const canonical = `https://tradgo.co.uk/${data.trade}`;
 
-// JSON-LD: WebPage + Service + FAQPage + BreadcrumbList
+// Shared content across all trades
+const FEATURES = [
+  {
+    title: 'Missed call? Sorted.',
+    description: "When you can't answer, TradGo texts the customer back within seconds. They stop Googling your competitors and start a conversation with you instead.",
+  },
+  {
+    title: 'Sounds like you, not a robot',
+    description: 'The agent learns your tone, your services, and your pricing. Customers get a response that sounds like it came from you — because it was trained on you.',
+  },
+  {
+    title: 'You stay in control',
+    description: 'Estimates and pricing always go through your approval. Simple questions get answered automatically. Emergencies get escalated to you immediately.',
+  },
+  {
+    title: 'SMS, WhatsApp, and your website',
+    description: 'Customers contact you however they prefer. Plus a chat widget for your existing site — one line of code and your AI agent is live. All channels feed into one inbox.',
+  },
+  {
+    title: '24/7 without the overtime',
+    description: 'Enquiries come in at 9pm, 6am, weekends. Your agent handles them all and you review the conversations when you are ready.',
+  },
+  {
+    title: "See what's coming in",
+    description: 'Your dashboard shows every conversation, estimate, and enquiry in one place. Filter by status, see what needs your attention, and track your pipeline.',
+  },
+];
+
+const STEPS = [
+  { number: '1', title: 'Sign up and set your services', description: `Enter your details, the ${data.tradeNameSingular.toLowerCase()} work you do, and your pricing. Takes about 10 minutes.` },
+  { number: '2', title: 'Set call forwarding on your phone', description: 'One setting change — forward unanswered calls to your TradGo number. Your existing number stays on your van, your cards, everywhere. Nothing changes.' },
+  { number: '3', title: "Start catching the jobs you're missing", description: 'Every missed call gets a text back within seconds. Your AI agent finds out what they need, gives a ballpark, and keeps them warm until you take over.' },
+];
+
+const INCLUDED = [
+  'Missed call text-back',
+  'AI agent trained on your voice',
+  'SMS and WhatsApp',
+  'Chat widget for your existing website',
+  'Dashboard and inbox',
+  'Approval flow on estimates',
+  'Google review requests',
+  'Emergency escalation',
+  'Learning loop — gets smarter daily',
+  'No minute limits or overage charges',
+];
+
+// JSON-LD structured data
 const jsonLd = [
   {
     '@context': 'https://schema.org',
@@ -122,15 +169,122 @@ const jsonLd = [
     </div>
   </section>
 
-  <!-- CREDENTIALS -->
+  <!-- FEATURES -->
+  <section class="py-10 sm:py-14 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold text-surface-900">Everything you need. Nothing you don't.</h2>
+        <p class="mt-4 text-lg text-surface-700 max-w-2xl mx-auto">
+          Built specifically for {data.tradeName.toLowerCase()} — not a generic chatbot slapped onto a website.
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        {FEATURES.map((feature) => (
+          <div class="bg-surface-50 rounded-2xl p-6 sm:p-8 border border-surface-100 hover:border-brand-200 hover:shadow-sm transition-all">
+            <div class="h-10 w-10 rounded-xl bg-brand-100 flex items-center justify-center mb-4">
+              <svg class="h-5 w-5 text-brand-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-surface-900 mb-2">{feature.title}</h3>
+            <p class="text-surface-700 text-sm leading-relaxed">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how-it-works" class="py-14 sm:py-20 bg-surface-50 scroll-mt-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold text-surface-900">Live in 10 minutes. Seriously.</h2>
+      </div>
+      <div class="max-w-3xl mx-auto space-y-8">
+        {STEPS.map((step) => (
+          <div class="flex gap-5">
+            <div class="shrink-0 h-10 w-10 rounded-full bg-brand-600 text-white flex items-center justify-center font-bold text-lg">
+              {step.number}
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-surface-900">{step.title}</h3>
+              <p class="mt-1 text-surface-700 leading-relaxed">{step.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="text-center mt-12">
+        <a
+          href="/dashboard"
+          class="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 py-3.5 rounded-xl transition-colors"
+        >
+          Get started free
+          <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLASSIFICATION -->
   <section class="py-14 sm:py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl sm:text-4xl font-bold text-surface-900 text-center mb-4">You stay in control. Always.</h2>
+        <p class="text-lg text-surface-700 text-center mb-10">
+          Every message the agent sends is classified into one of three categories:
+        </p>
+        <div class="space-y-4">
+          <div class="bg-green-50 rounded-xl p-5 border border-green-100 flex gap-4 items-start">
+            <div class="shrink-0 h-8 w-8 rounded-lg bg-green-100 flex items-center justify-center">
+              <svg class="h-4 w-4 text-green-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-surface-900">Safe — auto-sends</h3>
+              <p class="text-sm text-surface-700 mt-0.5">General info, availability, service area. Things the agent knows for sure. Sent instantly so the customer gets a fast reply.</p>
+            </div>
+          </div>
+          <div class="bg-amber-50 rounded-xl p-5 border border-amber-100 flex gap-4 items-start">
+            <div class="shrink-0 h-8 w-8 rounded-lg bg-amber-100 flex items-center justify-center">
+              <svg class="h-4 w-4 text-amber-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-surface-900">Approval — held for you</h3>
+              <p class="text-sm text-surface-700 mt-0.5">Estimates, pricing, anything the agent isn't 100% sure about. You see the draft, approve it, edit it, or write your own reply.</p>
+            </div>
+          </div>
+          <div class="bg-red-50 rounded-xl p-5 border border-red-100 flex gap-4 items-start">
+            <div class="shrink-0 h-8 w-8 rounded-lg bg-red-100 flex items-center justify-center">
+              <svg class="h-4 w-4 text-red-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-surface-900">Escalate — flagged urgent</h3>
+              <p class="text-sm text-surface-700 mt-0.5">Emergencies like {data.escalationExample}. The agent gives the customer the right safety advice and contacts you directly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREDENTIALS -->
+  <section class="py-14 sm:py-20 bg-surface-50">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl mx-auto text-center">
         <h2 class="text-3xl sm:text-4xl font-bold text-surface-900">{data.credentials.title}</h2>
         <p class="mt-4 text-lg text-surface-700 leading-relaxed">{data.credentials.body}</p>
         <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
           {data.credentials.schemes.map((scheme) => (
-            <span class="inline-flex items-center gap-2 bg-brand-50 text-brand-700 border border-brand-200 px-4 py-2 rounded-lg text-sm font-semibold">
+            <span class="inline-flex items-center gap-2 bg-white text-brand-700 border border-brand-200 px-4 py-2 rounded-lg text-sm font-semibold shadow-sm">
               <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                 <polyline points="9 12 11 14 15 10"></polyline>
@@ -138,6 +292,50 @@ const jsonLd = [
               {scheme}
             </span>
           ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="py-14 sm:py-20 bg-white scroll-mt-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold text-surface-900">Simple pricing. No surprises.</h2>
+        <p class="mt-4 text-lg text-surface-700">One plan. Everything included. One missed job pays for the whole year.</p>
+      </div>
+      <div class="max-w-md mx-auto">
+        <div class="bg-white rounded-2xl border-2 border-brand-600 p-8 sm:p-10 shadow-lg">
+          <div class="text-center">
+            <h3 class="text-lg font-semibold text-surface-900">TradGo Solo</h3>
+            <div class="mt-4 flex items-baseline justify-center gap-1">
+              <span class="text-5xl font-extrabold text-surface-900">£59</span>
+              <span class="text-lg text-surface-700">/month</span>
+            </div>
+            <p class="mt-2 text-sm text-brand-600 font-medium">14-day free trial — no card required</p>
+          </div>
+          <ul class="mt-8 space-y-3">
+            {INCLUDED.map((item) => (
+              <li class="flex items-start gap-3">
+                <svg class="h-5 w-5 text-brand-500 shrink-0 mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <span class="text-sm text-surface-800">{item}</span>
+              </li>
+            ))}
+          </ul>
+          <a
+            href="/dashboard"
+            class="mt-8 w-full inline-flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 py-3.5 rounded-xl transition-colors"
+          >
+            Start your free trial
+            <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+          <p class="mt-3 text-center text-xs text-surface-700">No setup fees. No contracts. Cancel anytime.</p>
         </div>
       </div>
     </div>
