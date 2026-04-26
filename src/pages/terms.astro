@@ -1,0 +1,160 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const title = 'Terms of Service — TradGo';
+const description = "The terms and conditions for using TradGo. Operated by Michael Stevenson trading as Autaimate, a UK sole trader.";
+const canonical = 'https://tradgo.co.uk/terms';
+const lastUpdated = '26 April 2026';
+---
+
+<Layout title={title} description={description} canonical={canonical} noindex={false}>
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+    <header class="mb-10">
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-surface-900 tracking-tight mb-3">Terms of Service</h1>
+      <p class="text-sm text-surface-700">Last updated: {lastUpdated}</p>
+    </header>
+
+    <div class="prose prose-surface max-w-none space-y-6 text-surface-800 leading-relaxed">
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">1. About these terms</h2>
+        <p>These terms govern your use of TradGo, a SaaS platform that provides AI-powered missed-call response and customer enquiry management for UK trades.</p>
+        <p>The service is operated by:</p>
+        <p class="ml-4">
+          <strong>Michael Stevenson</strong>, trading as <strong>Autaimate</strong> (a UK sole trader)<br />
+          49 Vicarage Road, St Austell, PL24 2PH, United Kingdom<br />
+          Contact: <a href="mailto:hello@tradgo.co.uk" class="text-brand-600 hover:text-brand-700 underline">hello@tradgo.co.uk</a>
+        </p>
+        <p>By creating an account or using the service, you agree to these terms. If you do not agree, do not use the service.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">2. The service</h2>
+        <p>TradGo provides an AI agent that responds to missed calls and customer enquiries on your behalf via SMS, WhatsApp, and an embeddable website chat widget. The service includes:</p>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Missed call text-back via call forwarding to a TradGo-provided number</li>
+          <li>An AI agent trained on your services and pricing that handles customer conversations</li>
+          <li>An approval workflow for estimates and pricing-related responses</li>
+          <li>A dashboard to manage conversations, customers, and pipeline</li>
+          <li>Optional credential verification for relevant trade schemes</li>
+        </ul>
+        <p>We may add, remove, or change features over time. We aim to give reasonable notice of material changes that affect you.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">3. Eligibility and accounts</h2>
+        <p>You must be at least 18 years old and operating a legitimate UK trade business to use TradGo. You're responsible for keeping your login details secure and for all activity under your account.</p>
+        <p>You must provide accurate information during onboarding. Misrepresenting your trade, credentials, or business is grounds for account termination.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">4. Subscription, trial, and billing</h2>
+        <ul class="list-disc pl-6 space-y-2">
+          <li><strong>Free trial:</strong> New accounts get 14 days free. No card is required to start the trial.</li>
+          <li><strong>Subscription:</strong> After the trial, the service is £59 per month (inclusive of VAT where applicable). Billing is handled by Stripe.</li>
+          <li><strong>Auto-renewal:</strong> Subscriptions renew monthly until cancelled.</li>
+          <li><strong>Cancellation:</strong> You can cancel anytime from your dashboard. Cancellation takes effect at the end of your current billing period — no pro-rata refunds for partial months.</li>
+          <li><strong>Failed payments:</strong> If a payment fails, we'll notify you and retry. Persistent payment failures result in account suspension.</li>
+          <li><strong>Price changes:</strong> We'll give you at least 30 days' notice of any price changes. You can cancel before they take effect if you don't accept them.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">5. Your right to cancel (Consumer Contracts Regulations 2013)</h2>
+        <p>If you sign up to TradGo as a consumer (rather than for business purposes), you have a 14-day right to cancel without giving a reason, starting from the day you sign up. Most TradGo users sign up for business purposes and this right typically does not apply, but we mention it for transparency.</p>
+        <p>To cancel under this right, email <a href="mailto:hello@tradgo.co.uk" class="text-brand-600 hover:text-brand-700 underline">hello@tradgo.co.uk</a> within 14 days. By starting to use the service during this period, you agree we may begin providing the service immediately and your cancellation right ends once the service is fully delivered.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">6. Acceptable use</h2>
+        <p>You must not:</p>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Use TradGo to send spam, harassing messages, or unsolicited marketing</li>
+          <li>Attempt to access other users' accounts or data</li>
+          <li>Reverse-engineer, decompile, or attempt to extract the source code of the service</li>
+          <li>Use the service for illegal activities or to facilitate them</li>
+          <li>Resell or sublicense the service without our written permission</li>
+          <li>Misrepresent yourself, your trade, or your credentials to your customers via the agent</li>
+          <li>Overload the service through automated means, bots, or excessive API usage</li>
+        </ul>
+        <p>We may suspend or terminate accounts that breach these rules.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">7. Your responsibilities</h2>
+        <p>TradGo is a tool to help you respond to customer enquiries, but you remain responsible for:</p>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>The accuracy of information you provide during onboarding (services, prices, credentials)</li>
+          <li>Reviewing and approving any AI-generated responses that involve pricing, estimates, or commitments to customers</li>
+          <li>Compliance with all UK trade regulations applicable to your work (NICEIC, Gas Safe, building regulations, Part P, etc.)</li>
+          <li>Honouring any commitments your AI agent makes on your behalf within the parameters you've configured</li>
+          <li>Customer interactions that follow the initial AI conversation — quoting, attending, completing work</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">8. AI-generated content</h2>
+        <p>The AI agent generates conversational responses based on your training data and customer messages. While we work to make these responses accurate and helpful:</p>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>The AI may occasionally produce incorrect or unexpected responses</li>
+          <li>Pricing and estimate information is held for your approval before sending — you're responsible for reviewing it</li>
+          <li>Emergency safety messages (gas leaks, electrical danger, etc.) follow hard-coded rules but you remain responsible for the safety of your customer interactions overall</li>
+          <li>You should review your dashboard regularly to monitor agent behaviour</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">9. Intellectual property</h2>
+        <p>TradGo, including the platform, software, design, and brand, is owned by Michael Stevenson trading as Autaimate. You receive a non-exclusive, non-transferable licence to use the service while your subscription is active.</p>
+        <p>You retain ownership of your business data, your customer conversations, and any voice samples you upload. By using the service, you grant us a licence to process this data solely for the purpose of providing TradGo to you.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">10. Data protection</h2>
+        <p>How we handle your personal data and your customers' data is set out in our <a href="/privacy" class="text-brand-600 hover:text-brand-700 underline">Privacy Policy</a>. By using the service, you confirm you have the right to provide any customer data that's processed through TradGo.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">11. Service availability</h2>
+        <p>We aim for high availability but cannot guarantee the service will be uninterrupted or error-free. We may need to take the service down for maintenance, security updates, or unexpected issues. We'll give reasonable notice for planned maintenance where possible.</p>
+        <p>Third-party services we depend on (Twilio for SMS, Anthropic for AI, Stripe for billing, etc.) may experience their own outages that affect TradGo. We're not liable for outages caused by third-party providers.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">12. Limitation of liability</h2>
+        <p>To the extent permitted by UK law:</p>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>We are not liable for indirect or consequential losses, including lost profits, lost business, or lost customers.</li>
+          <li>Our total liability for any claim relating to TradGo is limited to the amount you've paid us in the 12 months before the claim arose.</li>
+          <li>Nothing in these terms limits liability for death or personal injury caused by our negligence, fraud, or any other liability that cannot be limited under UK law.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">13. Termination</h2>
+        <p>You can stop using TradGo at any time by cancelling your subscription. We can terminate or suspend your account if you breach these terms, fail to pay, or use the service in ways that harm us or other users.</p>
+        <p>On termination, your access to the service ends. We retain certain data as set out in our Privacy Policy (e.g. for tax records).</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">14. Changes to these terms</h2>
+        <p>We may update these terms from time to time. The "Last updated" date at the top reflects any changes. Material changes will be notified to active customers by email at least 14 days before they take effect, giving you the chance to cancel if you don't accept them.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">15. Governing law and disputes</h2>
+        <p>These terms are governed by the laws of England and Wales. Any disputes will be dealt with by the courts of England and Wales, although consumers may have additional rights under their local consumer protection laws.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">16. Contact</h2>
+        <p>For questions about these terms or your subscription:</p>
+        <p class="ml-4">
+          Michael Stevenson, trading as Autaimate<br />
+          49 Vicarage Road, St Austell, PL24 2PH, United Kingdom<br />
+          <a href="mailto:hello@tradgo.co.uk" class="text-brand-600 hover:text-brand-700 underline">hello@tradgo.co.uk</a>
+        </p>
+      </section>
+    </div>
+  </article>
+</Layout>
