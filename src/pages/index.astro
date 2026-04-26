@@ -1,0 +1,57 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const title = 'TradGo — AI Agent for UK Trades';
+const description = 'TradGo gives UK tradespeople an AI agent that catches missed calls and texts customers back instantly. Built for electricians, plumbers, roofers, and gas engineers.';
+const canonical = 'https://tradgo.co.uk/';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': 'https://tradgo.co.uk/#organization',
+  name: 'TradGo',
+  url: 'https://tradgo.co.uk',
+  logo: 'https://tradgo.co.uk/favicon.svg',
+  description,
+  foundingDate: '2026',
+  areaServed: { '@type': 'Country', name: 'United Kingdom' },
+};
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonical={canonical}
+  jsonLd={jsonLd}
+  noindex={true}
+>
+  <section class="min-h-[70vh] flex items-center justify-center px-4">
+    <div class="max-w-2xl text-center">
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-surface-900 tracking-tight mb-6">
+        TradGo
+      </h1>
+      <p class="text-lg text-surface-600 mb-8">
+        AI agents for UK trades. Built for electricians, plumbers, roofers, and gas engineers.
+      </p>
+
+      <div class="grid sm:grid-cols-2 gap-3 max-w-md mx-auto">
+        <a href="/electricians" class="bg-brand-600 hover:bg-brand-700 text-white font-medium px-5 py-3 rounded-lg transition-colors">
+          For electricians
+        </a>
+        <a href="/plumbers" class="bg-surface-100 hover:bg-surface-200 text-surface-900 font-medium px-5 py-3 rounded-lg transition-colors">
+          For plumbers
+        </a>
+        <a href="/roofers" class="bg-surface-100 hover:bg-surface-200 text-surface-900 font-medium px-5 py-3 rounded-lg transition-colors">
+          For roofers
+        </a>
+        <a href="/gas-engineers" class="bg-surface-100 hover:bg-surface-200 text-surface-900 font-medium px-5 py-3 rounded-lg transition-colors">
+          For gas engineers
+        </a>
+      </div>
+
+      <p class="mt-8 text-sm text-surface-500">
+        Already a customer? <a href="/dashboard" class="text-brand-600 hover:text-brand-700 font-medium">Sign in</a>
+      </p>
+    </div>
+  </section>
+</Layout>
