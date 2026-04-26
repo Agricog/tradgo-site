@@ -1,0 +1,143 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const title = 'Privacy Policy — TradGo';
+const description = "How TradGo collects, uses, and protects your personal data. Operated by Michael Stevenson trading as Autaimate, a UK sole trader.";
+const canonical = 'https://tradgo.co.uk/privacy';
+const lastUpdated = '26 April 2026';
+---
+
+<Layout title={title} description={description} canonical={canonical} noindex={false}>
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+    <header class="mb-10">
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-surface-900 tracking-tight mb-3">Privacy Policy</h1>
+      <p class="text-sm text-surface-700">Last updated: {lastUpdated}</p>
+    </header>
+
+    <div class="prose prose-surface max-w-none space-y-6 text-surface-800 leading-relaxed">
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">1. Who we are</h2>
+        <p>This privacy policy applies to the TradGo service, available at tradgo.co.uk and app.tradgo.co.uk.</p>
+        <p>The data controller is:</p>
+        <p class="ml-4">
+          <strong>Michael Stevenson</strong>, trading as <strong>Autaimate</strong> (a UK sole trader)<br />
+          49 Vicarage Road, St Austell, PL24 2PH, United Kingdom<br />
+          Contact: <a href="mailto:hello@tradgo.co.uk" class="text-brand-600 hover:text-brand-700 underline">hello@tradgo.co.uk</a>
+        </p>
+        <p>If you have any questions about this policy, your data, or want to exercise your rights, contact us using the email above.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">2. What data we collect</h2>
+        <p>We collect the following categories of personal data:</p>
+
+        <h3 class="text-lg font-semibold text-surface-900 mt-4 mb-2">From tradespeople (TradGo customers)</h3>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Account details: name, email address, phone number, business name</li>
+          <li>Trade and service information: trade type, services offered, pricing ranges, geographic service area</li>
+          <li>Voice samples: audio recordings you upload during onboarding to train your AI agent</li>
+          <li>Credential information: scheme registration numbers (NICEIC, Gas Safe, etc.) where applicable</li>
+          <li>Billing data: payment method, billing address, transaction history (handled by Stripe — see processors below)</li>
+          <li>Authentication data: login records, session tokens (handled by Clerk — see processors below)</li>
+          <li>Conversation history: SMS, WhatsApp, and chat widget messages between your agent and your customers</li>
+        </ul>
+
+        <h3 class="text-lg font-semibold text-surface-900 mt-4 mb-2">From end customers (people who message a TradGo agent)</h3>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Phone number, name (where provided), and the content of their messages</li>
+          <li>Job-related information they share (location, property details, type of work needed)</li>
+          <li>Photos they send via WhatsApp</li>
+        </ul>
+        <p>We collect this data on behalf of the tradesperson, who is the controller of their customers' data; we act as a processor for that data.</p>
+
+        <h3 class="text-lg font-semibold text-surface-900 mt-4 mb-2">From all visitors</h3>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Technical data: IP address, browser type, device information, pages visited (collected by Cloudflare and Sentry — see processors below)</li>
+          <li>Cookies: see our <a href="/cookies" class="text-brand-600 hover:text-brand-700 underline">Cookies Policy</a> for details</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">3. How we use your data and our lawful basis</h2>
+        <p>Under UK GDPR (Article 6), we rely on the following lawful bases:</p>
+        <ul class="list-disc pl-6 space-y-2">
+          <li><strong>Performance of a contract</strong> (Article 6(1)(b)): to provide the TradGo service to subscribed tradespeople — running the AI agent, sending and receiving SMS/WhatsApp messages, processing payments, providing dashboard access.</li>
+          <li><strong>Legitimate interests</strong> (Article 6(1)(f)): to operate, secure, and improve the service — including monitoring for fraud and abuse, debugging via Sentry, and improving the AI agent's accuracy.</li>
+          <li><strong>Legal obligation</strong> (Article 6(1)(c)): to comply with UK law, including tax records, accounting, and responding to lawful requests from authorities.</li>
+          <li><strong>Consent</strong> (Article 6(1)(a)): for any non-essential cookies or marketing emails, where applicable.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">4. Data processors we use</h2>
+        <p>To deliver TradGo, we use the following sub-processors. Each is bound by a Data Processing Agreement (DPA) and processes data only on our instructions.</p>
+        <ul class="list-disc pl-6 space-y-1">
+          <li><strong>Cloudflare</strong> (USA / global) — DNS, CDN, hosting for tradgo.co.uk</li>
+          <li><strong>Railway</strong> (USA) — hosting for the app subdomain</li>
+          <li><strong>Neon</strong> (USA, EU regions) — PostgreSQL database</li>
+          <li><strong>Clerk</strong> (USA) — user authentication and session management</li>
+          <li><strong>Stripe</strong> (USA / UK) — payment processing</li>
+          <li><strong>Twilio</strong> (USA) — SMS and WhatsApp message delivery</li>
+          <li><strong>Anthropic</strong> (USA) — Claude AI model that powers the agent's conversation</li>
+          <li><strong>Resend</strong> (USA) — transactional email delivery</li>
+          <li><strong>Ably</strong> (UK / global) — real-time messaging infrastructure</li>
+          <li><strong>Sentry</strong> (USA) — error monitoring</li>
+        </ul>
+        <p>Where data is transferred outside the UK or EU (e.g. to USA-based processors), we rely on UK adequacy decisions, Standard Contractual Clauses, or other lawful transfer mechanisms.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">5. How long we keep data</h2>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Account data: kept for as long as you have an active subscription, plus 6 years for tax and accounting purposes (HMRC requirement).</li>
+          <li>Conversation data: kept while your account is active so you can refer back to past customer conversations. Deleted within 90 days of account closure unless required for legal reasons.</li>
+          <li>Voice samples: kept while your account is active. Deleted on request or within 90 days of account closure.</li>
+          <li>Billing records: kept for 6 years (HMRC requirement).</li>
+          <li>Technical logs and error reports: kept for 30 days.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">6. Your rights under UK GDPR</h2>
+        <p>You have the following rights regarding your personal data:</p>
+        <ul class="list-disc pl-6 space-y-1">
+          <li><strong>Right of access</strong> — request a copy of the personal data we hold about you</li>
+          <li><strong>Right to rectification</strong> — correct inaccurate data</li>
+          <li><strong>Right to erasure</strong> — request deletion of your data ("right to be forgotten")</li>
+          <li><strong>Right to restrict processing</strong> — limit how we use your data</li>
+          <li><strong>Right to data portability</strong> — receive your data in a portable format</li>
+          <li><strong>Right to object</strong> — object to processing based on legitimate interests</li>
+          <li><strong>Right to withdraw consent</strong> — where we rely on consent</li>
+        </ul>
+        <p>To exercise any of these rights, email <a href="mailto:hello@tradgo.co.uk" class="text-brand-600 hover:text-brand-700 underline">hello@tradgo.co.uk</a>. We respond within 30 days.</p>
+        <p>If you're not satisfied with our response, you can complain to the UK Information Commissioner's Office (ICO) at <a href="https://ico.org.uk" class="text-brand-600 hover:text-brand-700 underline" rel="noopener">ico.org.uk</a> or call 0303 123 1113.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">7. Security</h2>
+        <p>We take reasonable technical and organisational measures to protect your data, including encryption in transit (TLS), encryption at rest, access controls, and regular security reviews. No system is perfectly secure, but we work continuously to protect your information.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">8. Children</h2>
+        <p>TradGo is a business service intended for adults running trade businesses. We do not knowingly collect personal data from anyone under 18. If you believe a child has provided data to us, contact us and we'll delete it.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">9. Changes to this policy</h2>
+        <p>We may update this policy from time to time. The "Last updated" date at the top will reflect any changes. Significant changes will be notified to active customers by email.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-surface-900 mt-8 mb-3">10. Contact</h2>
+        <p>For all data protection questions or to exercise your rights:</p>
+        <p class="ml-4">
+          Michael Stevenson, trading as Autaimate<br />
+          49 Vicarage Road, St Austell, PL24 2PH, United Kingdom<br />
+          <a href="mailto:hello@tradgo.co.uk" class="text-brand-600 hover:text-brand-700 underline">hello@tradgo.co.uk</a>
+        </p>
+      </section>
+    </div>
+  </article>
+</Layout>
