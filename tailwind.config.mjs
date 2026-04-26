@@ -11,10 +11,13 @@ export default {
           300: '#86efac',
           400: '#4ade80',
           500: '#22c55e',
-          600: '#16a34a',
-          700: '#15803d',
-          800: '#166534',
-          900: '#14532d',
+          // Below: shifted darker for WCAG AA contrast compliance
+          // Old brand-600 #16a34a only gave 3.13:1 vs white (fails 4.5:1 AA).
+          // New brand-600 #15803d gives 5.0:1 vs white (passes AA).
+          600: '#15803d',
+          700: '#166534',
+          800: '#14532d',
+          900: '#052e16',
           950: '#052e16',
         },
         surface: {
