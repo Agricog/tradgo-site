@@ -1,0 +1,30 @@
+---
+// Nav links to /dashboard which is proxied to Railway via _routes.json
+---
+
+<nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-sm border-b border-surface-100">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2" aria-label="TradGo home">
+      <svg class="h-7 w-7 text-brand-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+      </svg>
+      <span class="text-xl font-bold text-surface-900">TradGo</span>
+    </a>
+
+    <div class="flex items-center gap-3">
+      <a href="/electricians" class="hidden md:block text-sm text-surface-700 hover:text-surface-900 transition-colors">For electricians</a>
+      <a href="/plumbers" class="hidden md:block text-sm text-surface-700 hover:text-surface-900 transition-colors">For plumbers</a>
+      <a href="/guides" class="hidden md:block text-sm text-surface-700 hover:text-surface-900 transition-colors">Guides</a>
+
+      <a href="/dashboard" class="text-sm font-medium text-surface-700 hover:text-surface-900 transition-colors">
+        Sign in
+      </a>
+      <a
+        href="/dashboard"
+        class="bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors"
+      >
+        Start free trial
+      </a>
+    </div>
+  </div>
+</nav>
