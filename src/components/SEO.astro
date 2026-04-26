@@ -1,0 +1,55 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  ogImage?: string;
+  noindex?: boolean;
+  jsonLd?: object | object[];
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage = 'https://tradgo.co.uk/og-images/default.jpg',
+  noindex = false,
+  jsonLd,
+} = Astro.props;
+
+const jsonLdArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+
+{noindex ? (
+  <meta name="robots" content="noindex, nofollow" />
+) : (
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+)}
+
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<meta name="author" content="TradGo" />
+<meta name="theme-color" content="#16a34a" />
+
+<!-- OpenGraph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:site_name" content="TradGo" />
+<meta property="og:locale" content="en_GB" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+<!-- JSON-LD structured data -->
+{jsonLdArray.map((schema) => (
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+))}
