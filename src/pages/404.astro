@@ -1,0 +1,40 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const title = 'Page not found — TradGo';
+const description = "The page you're looking for doesn't exist. Try one of our trade pages or head home.";
+const canonical = 'https://tradgo.co.uk/404';
+---
+
+<Layout title={title} description={description} canonical={canonical} noindex={true}>
+  <section class="min-h-[70vh] flex items-center justify-center px-4 py-20">
+    <div class="max-w-2xl text-center">
+      <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">404</p>
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-surface-900 tracking-tight mb-4">
+        Can't find that page
+      </h1>
+      <p class="text-lg text-surface-700 mb-10 leading-relaxed">
+        The page you're looking for doesn't exist or has moved. Try one of these instead:
+      </p>
+
+      <div class="grid sm:grid-cols-2 gap-3 max-w-md mx-auto mb-8">
+        <a href="/electricians" class="bg-brand-600 hover:bg-brand-700 text-white font-medium px-5 py-3 rounded-lg transition-colors">
+          For electricians
+        </a>
+        <a href="/plumbers" class="bg-surface-100 hover:bg-surface-200 text-surface-900 font-medium px-5 py-3 rounded-lg transition-colors">
+          For plumbers
+        </a>
+        <a href="/roofers" class="bg-surface-100 hover:bg-surface-200 text-surface-900 font-medium px-5 py-3 rounded-lg transition-colors">
+          For roofers
+        </a>
+        <a href="/gas-engineers" class="bg-surface-100 hover:bg-surface-200 text-surface-900 font-medium px-5 py-3 rounded-lg transition-colors">
+          For gas engineers
+        </a>
+      </div>
+
+      <p class="text-sm text-surface-700">
+        Or <a href="/" class="text-brand-600 hover:text-brand-700 font-medium underline">go back home</a>
+      </p>
+    </div>
+  </section>
+</Layout>
