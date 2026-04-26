@@ -1,57 +1,440 @@
 ---
 import Layout from '@/layouts/Layout.astro';
+import TradeHero from '@/components/TradeHero.astro';
+import TradeFAQ from '@/components/TradeFAQ.astro';
 
-const title = 'TradGo — AI Agent for UK Trades';
-const description = 'TradGo gives UK tradespeople an AI agent that catches missed calls and texts customers back instantly. Built for electricians, plumbers, roofers, and gas engineers.';
+const title = 'TradGo — AI Agent for UK Trades | Never Miss a Job Again';
+const description = "TradGo gives UK electricians, plumbers, roofers, and gas engineers an AI agent that catches missed calls and texts customers back instantly. £59/month. 14-day free trial.";
 const canonical = 'https://tradgo.co.uk/';
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  '@id': 'https://tradgo.co.uk/#organization',
-  name: 'TradGo',
-  url: 'https://tradgo.co.uk',
-  logo: 'https://tradgo.co.uk/favicon.svg',
-  description,
-  foundingDate: '2026',
-  areaServed: { '@type': 'Country', name: 'United Kingdom' },
-};
+// Hero phone conversation - electrician example (most recognizable)
+const phoneConversation = [
+  {
+    from: 'agent' as const,
+    text: "Hi, it's Dave's Electrical. Sorry Dave couldn't get to the phone — he's on a job right now. Drop me a quick message about what you need and we'll get back to you.",
+    time: '14:21',
+  },
+  {
+    from: 'customer' as const,
+    text: 'Hi, I need a consumer unit replaced in my house',
+    time: '14:22',
+  },
+  {
+    from: 'agent' as const,
+    text: "No problem. Where's the job located, and is it a house or a flat?",
+    time: '14:22',
+  },
+];
+
+const TRADES = [
+  {
+    name: 'Electricians',
+    href: '/electricians',
+    description: "Catch every consumer unit job, EICR, and EV charger enquiry while you're on the tools.",
+  },
+  {
+    name: 'Plumbers',
+    href: '/plumbers',
+    description: 'Triage emergency leaks, give ballparks on common jobs, prioritise vulnerable customers.',
+  },
+  {
+    name: 'Roofers',
+    href: '/roofers',
+    description: 'Handle storm damage rush, book surveys, gather insurance claim info before you call back.',
+  },
+  {
+    name: 'Gas Engineers',
+    href: '/gas-engineers',
+    description: 'Boiler repair triage, hard-coded gas safety responses, landlord CP12 booking.',
+  },
+];
+
+const FEATURES = [
+  {
+    title: 'Missed call? Sorted.',
+    description: "When you can't answer, TradGo texts the customer back within seconds. They stop Googling your competitors and start a conversation with you instead.",
+  },
+  {
+    title: 'Sounds like you, not a robot',
+    description: 'The agent learns your tone, your services, and your pricing. Customers get a response that sounds like it came from you — because it was trained on you.',
+  },
+  {
+    title: 'You stay in control',
+    description: 'Estimates and pricing always go through your approval. Simple questions get answered automatically. Emergencies get escalated to you immediately.',
+  },
+  {
+    title: 'SMS, WhatsApp, and your website',
+    description: 'Customers contact you however they prefer. Plus a chat widget for your existing site — one line of code and your AI agent is live. All channels feed into one inbox.',
+  },
+  {
+    title: '24/7 without the overtime',
+    description: 'Enquiries come in at 9pm, 6am, weekends. Your agent handles them all and you review the conversations when you are ready.',
+  },
+  {
+    title: "See what's coming in",
+    description: 'Your dashboard shows every conversation, estimate, and enquiry in one place. Filter by status, see what needs your attention, and track your pipeline.',
+  },
+];
+
+const STEPS = [
+  { number: '1', title: 'Sign up and set your services', description: 'Enter your details, the work you do, and your pricing. Takes about 10 minutes.' },
+  { number: '2', title: 'Set call forwarding on your phone', description: 'One setting change — forward unanswered calls to your TradGo number. Your existing number stays on your van and your cards. Nothing changes externally.' },
+  { number: '3', title: "Start catching the jobs you're missing", description: 'Every missed call gets a text back within seconds. Your AI agent finds out what they need and keeps them warm until you take over.' },
+];
+
+const INCLUDED = [
+  'Missed call text-back',
+  'AI agent trained on your voice',
+  'SMS and WhatsApp',
+  'Chat widget for your existing website',
+  'Dashboard and inbox',
+  'Approval flow on estimates',
+  'Google review requests',
+  'Emergency escalation',
+  'Learning loop — gets smarter daily',
+  'No minute limits or overage charges',
+];
+
+const FAQS = [
+  {
+    question: 'What is TradGo?',
+    answer: "TradGo is an AI agent built for UK trades — electricians, plumbers, roofers, and gas engineers. When you miss a call, TradGo texts the customer back within seconds, finds out what they need, gives them a ballpark, and keeps them warm until you're free.",
+  },
+  {
+    question: 'How does the missed call text-back work?',
+    answer: "You set your phone to forward unanswered calls to your TradGo number. When you miss a call, TradGo plays a short message telling the customer a text is on its way, then immediately sends them an SMS. The AI agent handles the conversation from there. You keep your existing number — nothing changes on your van or cards.",
+  },
+  {
+    question: 'Will customers know they are talking to AI?',
+    answer: "The agent introduces itself as your agent — it says 'Hi, I'm [your name]'s agent' so the customer knows they're not talking to you directly. It speaks naturally in your voice and tone, so conversations feel personal and professional.",
+  },
+  {
+    question: 'How does the AI agent know my prices?',
+    answer: "During onboarding you enter your services and pricing ranges. The agent uses these to give customers accurate ballpark estimates. For anything it's unsure about, it holds the message for your approval before sending.",
+  },
+  {
+    question: 'What happens if the agent gets a question wrong?',
+    answer: "TradGo classifies every response into three categories: SAFE (auto-sends), APPROVAL (holds for your review), and ESCALATE (flags as urgent). Estimates and pricing always go through your approval first. You have full control.",
+  },
+  {
+    question: 'Does TradGo work with WhatsApp?',
+    answer: "Yes. TradGo supports SMS, WhatsApp, and a website chat widget. Customers can message you on whichever channel they prefer and the agent handles all three identically through one inbox.",
+  },
+  {
+    question: 'How much does TradGo cost?',
+    answer: "TradGo is £59 per month with a 14-day free trial. Everything is included — missed call text-back, SMS, WhatsApp, dashboard, and the AI agent. No setup fees, no minute limits, no overage charges. Cancel anytime.",
+  },
+  {
+    question: 'How long does it take to set up TradGo?',
+    answer: "Most tradespeople complete onboarding in under 10 minutes. You enter your details, services, and pricing — then your AI agent goes live immediately. The only other step is setting call forwarding on your phone, which takes 30 seconds.",
+  },
+  {
+    question: 'Can I take over a conversation if I want to reply myself?',
+    answer: "Yes. You can take over any conversation at any time from your dashboard. When you reply directly, the agent pauses for that conversation so there is no overlap. You are always in control.",
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': 'https://tradgo.co.uk/#organization',
+    name: 'TradGo',
+    url: 'https://tradgo.co.uk',
+    logo: 'https://tradgo.co.uk/favicon.svg',
+    description,
+    foundingDate: '2026',
+    areaServed: { '@type': 'Country', name: 'United Kingdom' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': 'https://tradgo.co.uk/#webpage',
+    url: canonical,
+    name: title,
+    description,
+    isPartOf: { '@id': 'https://tradgo.co.uk/#organization' },
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['#quick-answer', 'h1'],
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'TradGo',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    offers: {
+      '@type': 'Offer',
+      price: '59',
+      priceCurrency: 'GBP',
+      priceSpecification: {
+        '@type': 'UnitPriceSpecification',
+        price: '59',
+        priceCurrency: 'GBP',
+        billingDuration: 'P1M',
+        description: '14-day free trial. Cancel anytime.',
+      },
+    },
+    description,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: FAQS.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+    })),
+  },
+];
 ---
 
-<Layout
-  title={title}
-  description={description}
-  canonical={canonical}
-  jsonLd={jsonLd}
-  noindex={true}
->
-  <section class="min-h-[70vh] flex items-center justify-center px-4">
-    <div class="max-w-2xl text-center">
-      <h1 class="text-4xl sm:text-5xl font-extrabold text-surface-900 tracking-tight mb-6">
-        TradGo
-      </h1>
-      <p class="text-lg text-surface-600 mb-8">
-        AI agents for UK trades. Built for electricians, plumbers, roofers, and gas engineers.
-      </p>
+<Layout title={title} description={description} canonical={canonical} jsonLd={jsonLd}>
+  <TradeHero
+    title="Never miss a job again"
+    subtitle="Can't answer the phone? TradGo texts your customer back within seconds — finds out what they need, gives them a ballpark, and keeps them warm until you're free. Built for UK electricians, plumbers, roofers, and gas engineers."
+    voiceQuestion="TradGo is an AI agent for UK tradespeople that catches missed calls, texts customers back instantly, and handles enquiries via SMS and WhatsApp until you're free."
+    conversation={phoneConversation}
+  />
 
-      <div class="grid sm:grid-cols-2 gap-3 max-w-md mx-auto">
-        <a href="/electricians" class="bg-brand-600 hover:bg-brand-700 text-white font-medium px-5 py-3 rounded-lg transition-colors">
-          For electricians
-        </a>
-        <a href="/plumbers" class="bg-surface-100 hover:bg-surface-200 text-surface-900 font-medium px-5 py-3 rounded-lg transition-colors">
-          For plumbers
-        </a>
-        <a href="/roofers" class="bg-surface-100 hover:bg-surface-200 text-surface-900 font-medium px-5 py-3 rounded-lg transition-colors">
-          For roofers
-        </a>
-        <a href="/gas-engineers" class="bg-surface-100 hover:bg-surface-200 text-surface-900 font-medium px-5 py-3 rounded-lg transition-colors">
-          For gas engineers
+  <!-- TRUST BAR -->
+  <section class="bg-surface-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
+      <p class="text-xl sm:text-2xl font-bold text-white mb-3">Built for UK trades</p>
+      <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-surface-200">
+        <span>Missed call text-back</span>
+        <span class="text-surface-700">·</span>
+        <span>SMS + WhatsApp</span>
+        <span class="text-surface-700">·</span>
+        <span>Live in 10 minutes</span>
+        <span class="text-surface-700">·</span>
+        <span>£59/month — everything included</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="bg-gradient-to-b from-surface-50 to-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl sm:text-4xl font-bold text-surface-900">Every missed call is a job lost</h2>
+        <p class="mt-4 text-lg text-surface-700 leading-relaxed">
+          You're up a ladder, hands full, on another job. The phone rings. You can't answer. By the time you call back, they've booked the next person on Google. 85% of customers who can't reach you won't leave a voicemail — they just keep dialling. TradGo answers the second you can't.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRADE CARDS -->
+  <section class="py-10 sm:py-14 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold text-surface-900">Choose your trade</h2>
+        <p class="mt-4 text-lg text-surface-700 max-w-2xl mx-auto">
+          See how TradGo handles enquiries specific to your work — your prices, your jargon, your emergencies.
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        {TRADES.map((trade) => (
+          <a
+            href={trade.href}
+            class="group bg-surface-50 hover:bg-white rounded-2xl p-6 border border-surface-100 hover:border-brand-300 hover:shadow-md transition-all"
+          >
+            <div class="h-10 w-10 rounded-xl bg-brand-100 flex items-center justify-center mb-4 group-hover:bg-brand-200 transition-colors">
+              <svg class="h-5 w-5 text-brand-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-surface-900 mb-2 group-hover:text-brand-700 transition-colors">{trade.name}</h3>
+            <p class="text-sm text-surface-700 leading-relaxed">{trade.description}</p>
+            <span class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-brand-600 group-hover:text-brand-700">
+              See more
+              <svg class="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="py-10 sm:py-14 bg-surface-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold text-surface-900">Everything you need. Nothing you don't.</h2>
+        <p class="mt-4 text-lg text-surface-700 max-w-2xl mx-auto">
+          Built specifically for tradespeople — not a generic chatbot slapped onto a website.
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        {FEATURES.map((feature) => (
+          <div class="bg-white rounded-2xl p-6 sm:p-8 border border-surface-100 hover:border-brand-200 hover:shadow-sm transition-all">
+            <div class="h-10 w-10 rounded-xl bg-brand-100 flex items-center justify-center mb-4">
+              <svg class="h-5 w-5 text-brand-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-surface-900 mb-2">{feature.title}</h3>
+            <p class="text-surface-700 text-sm leading-relaxed">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how-it-works" class="py-14 sm:py-20 bg-white scroll-mt-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold text-surface-900">Live in 10 minutes. Seriously.</h2>
+      </div>
+      <div class="max-w-3xl mx-auto space-y-8">
+        {STEPS.map((step) => (
+          <div class="flex gap-5">
+            <div class="shrink-0 h-10 w-10 rounded-full bg-brand-600 text-white flex items-center justify-center font-bold text-lg">
+              {step.number}
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-surface-900">{step.title}</h3>
+              <p class="mt-1 text-surface-700 leading-relaxed">{step.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="text-center mt-12">
+        <a
+          href="https://app.tradgo.co.uk/dashboard"
+          class="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 py-3.5 rounded-xl transition-colors"
+        >
+          Get started free
+          <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
         </a>
       </div>
+    </div>
+  </section>
 
-      <p class="mt-8 text-sm text-surface-500">
-        Already a customer? <a href="https://app.tradgo.co.uk/dashboard" class="text-brand-600 hover:text-brand-700 font-medium">Sign in</a>
+  <!-- CLASSIFICATION -->
+  <section class="py-14 sm:py-20 bg-surface-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl sm:text-4xl font-bold text-surface-900 text-center mb-4">You stay in control. Always.</h2>
+        <p class="text-lg text-surface-700 text-center mb-10">
+          Every message the agent sends is classified into one of three categories:
+        </p>
+        <div class="space-y-4">
+          <div class="bg-green-50 rounded-xl p-5 border border-green-100 flex gap-4 items-start">
+            <div class="shrink-0 h-8 w-8 rounded-lg bg-green-100 flex items-center justify-center">
+              <svg class="h-4 w-4 text-green-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-surface-900">Safe — auto-sends</h3>
+              <p class="text-sm text-surface-700 mt-0.5">General info, availability, service area. Things the agent knows for sure. Sent instantly so the customer gets a fast reply.</p>
+            </div>
+          </div>
+          <div class="bg-amber-50 rounded-xl p-5 border border-amber-100 flex gap-4 items-start">
+            <div class="shrink-0 h-8 w-8 rounded-lg bg-amber-100 flex items-center justify-center">
+              <svg class="h-4 w-4 text-amber-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-surface-900">Approval — held for you</h3>
+              <p class="text-sm text-surface-700 mt-0.5">Estimates, pricing, anything the agent isn't 100% sure about. You see the draft, approve it, edit it, or write your own reply.</p>
+            </div>
+          </div>
+          <div class="bg-red-50 rounded-xl p-5 border border-red-100 flex gap-4 items-start">
+            <div class="shrink-0 h-8 w-8 rounded-lg bg-red-100 flex items-center justify-center">
+              <svg class="h-4 w-4 text-red-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-surface-900">Escalate — flagged urgent</h3>
+              <p class="text-sm text-surface-700 mt-0.5">Emergencies — gas smells, electrical danger, burst pipes flooding into electrics, structural roof damage. The agent gives the right safety advice and contacts you directly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="py-14 sm:py-20 bg-white scroll-mt-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold text-surface-900">Simple pricing. No surprises.</h2>
+        <p class="mt-4 text-lg text-surface-700">One plan. Everything included. One missed job pays for the whole year.</p>
+      </div>
+      <div class="max-w-md mx-auto">
+        <div class="bg-white rounded-2xl border-2 border-brand-600 p-8 sm:p-10 shadow-lg">
+          <div class="text-center">
+            <h3 class="text-lg font-semibold text-surface-900">TradGo Solo</h3>
+            <div class="mt-4 flex items-baseline justify-center gap-1">
+              <span class="text-5xl font-extrabold text-surface-900">£59</span>
+              <span class="text-lg text-surface-700">/month</span>
+            </div>
+            <p class="mt-2 text-sm text-brand-600 font-medium">14-day free trial — no card required</p>
+          </div>
+          <ul class="mt-8 space-y-3">
+            {INCLUDED.map((item) => (
+              <li class="flex items-start gap-3">
+                <svg class="h-5 w-5 text-brand-500 shrink-0 mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <span class="text-sm text-surface-800">{item}</span>
+              </li>
+            ))}
+          </ul>
+          <a
+            href="https://app.tradgo.co.uk/dashboard"
+            class="mt-8 w-full inline-flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 py-3.5 rounded-xl transition-colors"
+          >
+            Start your free trial
+            <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+          <p class="mt-3 text-center text-xs text-surface-700">No setup fees. No contracts. Cancel anytime.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <TradeFAQ faqs={FAQS} tradeName="trades" />
+
+  <!-- FINAL CTA -->
+  <section class="py-16 sm:py-24 bg-brand-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold text-white">
+        Stop losing jobs to missed calls
+      </h2>
+      <p class="mt-4 text-lg text-brand-100 max-w-2xl mx-auto">
+        Set up your AI agent in 10 minutes. Every missed call becomes a conversation. Every conversation is a chance to win the job.
       </p>
+      <a
+        href="https://app.tradgo.co.uk/dashboard"
+        class="mt-8 inline-flex items-center gap-2 bg-white hover:bg-surface-50 text-brand-700 font-semibold px-8 py-4 rounded-xl text-lg transition-colors"
+      >
+        Start your 14-day free trial
+        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+      <p class="mt-4 text-sm text-brand-200">£59/month after trial. No card needed to start. Cancel anytime.</p>
     </div>
   </section>
 </Layout>
