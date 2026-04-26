@@ -1,0 +1,170 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import TradeHero from '@/components/TradeHero.astro';
+import TradeFAQ from '@/components/TradeFAQ.astro';
+
+export async function getStaticPaths() {
+  const trades = await getCollection('trades');
+  return trades.map((trade) => ({
+    params: { trade: trade.data.trade },
+    props: { trade },
+  }));
+}
+
+const { trade } = Astro.props;
+const data = trade.data;
+
+const canonical = `https://tradgo.co.uk/${data.trade}`;
+
+// JSON-LD: WebPage + Service + FAQPage + BreadcrumbList
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${canonical}#webpage`,
+    url: canonical,
+    name: data.metaTitle,
+    description: data.metaDescription,
+    isPartOf: { '@id': 'https://tradgo.co.uk/#organization' },
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['#quick-answer', 'h1'],
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    serviceType: `AI agent for UK ${data.tradeName.toLowerCase()}`,
+    provider: {
+      '@type': 'Organization',
+      name: 'TradGo',
+      url: 'https://tradgo.co.uk',
+    },
+    areaServed: { '@type': 'Country', name: 'United Kingdom' },
+    audience: {
+      '@type': 'BusinessAudience',
+      audienceType: data.tradeName,
+    },
+    description: data.metaDescription,
+    offers: {
+      '@type': 'Offer',
+      price: '59',
+      priceCurrency: 'GBP',
+      priceSpecification: {
+        '@type': 'UnitPriceSpecification',
+        price: '59',
+        priceCurrency: 'GBP',
+        billingDuration: 'P1M',
+        description: '14-day free trial. Cancel anytime.',
+      },
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: data.faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://tradgo.co.uk' },
+      { '@type': 'ListItem', position: 2, name: data.tradeName, item: canonical },
+    ],
+  },
+];
+---
+
+<Layout
+  title={data.metaTitle}
+  description={data.metaDescription}
+  canonical={canonical}
+  jsonLd={jsonLd}
+>
+  <TradeHero
+    title={data.heroTitle}
+    subtitle={data.heroSubtitle}
+    voiceQuestion={data.heroVoiceQuestion}
+    conversation={data.phoneConversation}
+  />
+
+  <!-- TRUST BAR -->
+  <section class="bg-surface-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
+      <p class="text-xl sm:text-2xl font-bold text-white mb-3">Built for UK {data.tradeName.toLowerCase()}</p>
+      <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-surface-200">
+        <span>Missed call text-back</span>
+        <span class="text-surface-700">·</span>
+        <span>SMS + WhatsApp</span>
+        <span class="text-surface-700">·</span>
+        <span>{data.credentials.schemes.join(' / ')} verified</span>
+        <span class="text-surface-700">·</span>
+        <span>£59/month — everything included</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="bg-gradient-to-b from-surface-50 to-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl sm:text-4xl font-bold text-surface-900">{data.problemTitle}</h2>
+        <p class="mt-4 text-lg text-surface-700 leading-relaxed">{data.problemBody}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREDENTIALS -->
+  <section class="py-14 sm:py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl sm:text-4xl font-bold text-surface-900">{data.credentials.title}</h2>
+        <p class="mt-4 text-lg text-surface-700 leading-relaxed">{data.credentials.body}</p>
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+          {data.credentials.schemes.map((scheme) => (
+            <span class="inline-flex items-center gap-2 bg-brand-50 text-brand-700 border border-brand-200 px-4 py-2 rounded-lg text-sm font-semibold">
+              <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <polyline points="9 12 11 14 15 10"></polyline>
+              </svg>
+              {scheme}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <TradeFAQ faqs={data.faqs} tradeName={data.tradeName} />
+
+  <!-- FINAL CTA -->
+  <section class="py-16 sm:py-24 bg-brand-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold text-white">
+        Stop losing jobs to missed calls
+      </h2>
+      <p class="mt-4 text-lg text-brand-100 max-w-2xl mx-auto">
+        Set up your AI agent in 10 minutes. Every missed call becomes a conversation. Every conversation is a chance to win the job.
+      </p>
+      <a
+        href="/dashboard"
+        class="mt-8 inline-flex items-center gap-2 bg-white hover:bg-surface-50 text-brand-700 font-semibold px-8 py-4 rounded-xl text-lg transition-colors"
+      >
+        Start your 14-day free trial
+        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+      <p class="mt-4 text-sm text-brand-200">£59/month after trial. No card needed to start. Cancel anytime.</p>
+    </div>
+  </section>
+</Layout>
