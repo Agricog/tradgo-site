@@ -1,0 +1,43 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const title = 'Guides for UK Trades — TradGo';
+const description = 'In-depth guides for UK electricians, plumbers, roofers, and gas engineers — written from 40 years in construction. Coming soon.';
+const canonical = 'https://tradgo.co.uk/guides';
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonical={canonical}
+  noindex={true}
+>
+  <section class="min-h-[60vh] flex items-center justify-center px-4 py-20">
+    <div class="max-w-2xl text-center">
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-surface-900 tracking-tight mb-6">
+        Guides
+      </h1>
+      <p class="text-lg text-surface-700 mb-8 leading-relaxed">
+        In-depth guides for UK trades on missed-call recovery, customer enquiry handling, pricing, and growing a one-person trade business — written from 40 years on the tools.
+      </p>
+      <p class="text-base text-surface-600 mb-10">
+        Coming soon. In the meantime, see how TradGo works for your trade:
+      </p>
+
+      <div class="grid sm:grid-cols-2 gap-3 max-w-md mx-auto">
+        <a href="/electricians" class="bg-brand-600 hover:bg-brand-700 text-white font-medium px-5 py-3 rounded-lg transition-colors">
+          For electricians
+        </a>
+        <a href="/plumbers" class="bg-surface-100 hover:bg-surface-200 text-surface-900 font-medium px-5 py-3 rounded-lg transition-colors">
+          For plumbers
+        </a>
+        <a href="/roofers" class="bg-surface-100 hover:bg-surface-200 text-surface-900 font-medium px-5 py-3 rounded-lg transition-colors">
+          For roofers
+        </a>
+        <a href="/gas-engineers" class="bg-surface-100 hover:bg-surface-200 text-surface-900 font-medium px-5 py-3 rounded-lg transition-colors">
+          For gas engineers
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
