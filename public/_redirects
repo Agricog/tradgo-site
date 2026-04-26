@@ -1,0 +1,11 @@
+# Permanent redirects from old tradgo.co.uk paths to app.tradgo.co.uk
+# Preserves SEO authority and existing bookmarks/external links
+
+/dashboard            https://app.tradgo.co.uk/dashboard            301
+/dashboard/*          https://app.tradgo.co.uk/dashboard/:splat     301
+/onboarding           https://app.tradgo.co.uk/onboarding           301
+/onboarding/*         https://app.tradgo.co.uk/onboarding/:splat    301
+/sign-in              https://app.tradgo.co.uk/sign-in              301
+/sign-in/*            https://app.tradgo.co.uk/sign-in/:splat       301
+/agent                https://app.tradgo.co.uk/agent                301
+/agent/*              https://app.tradgo.co.uk/agent/:splat         301
