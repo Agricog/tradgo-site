@@ -1,0 +1,33 @@
+---
+export interface Props {
+  faqs: Array<{
+    question: string;
+    answer: string;
+  }>;
+  tradeName: string;
+}
+
+const { faqs, tradeName } = Astro.props;
+---
+
+<section id="faq" class="py-14 sm:py-20 bg-white scroll-mt-20">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl sm:text-4xl font-bold text-surface-900 text-center mb-12">
+      Questions {tradeName.toLowerCase()} ask
+    </h2>
+
+    <div class="max-w-3xl mx-auto space-y-4">
+      {faqs.map((faq) => (
+        <details class="group bg-surface-50 rounded-xl border border-surface-100 overflow-hidden">
+          <summary class="flex items-center justify-between cursor-pointer px-6 py-4 text-left font-medium text-surface-900 hover:bg-surface-100 transition-colors">
+            <span>{faq.question}</span>
+            <span class="ml-4 shrink-0 text-surface-700 group-open:rotate-45 transition-transform text-xl leading-none">+</span>
+          </summary>
+          <div class="px-6 pb-4 text-sm text-surface-700 leading-relaxed">
+            {faq.answer}
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
